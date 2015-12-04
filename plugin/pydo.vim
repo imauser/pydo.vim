@@ -1,10 +1,14 @@
 if !has('python')
     finish
 endif
-map <Leader>p :call pydo#DoFromVisualHere()<CR>
 
-!function MeinTest()
-py print("hello")
-endfunction
+" init on start
+augroup pydoStart
+  autocmd!
+  autocmd VimEnter * call pydoScripts#init()
+augroup END
 
-map <Leader>l :call pydo#DoFromVisualHere()<CR>
+" shortcuts:
+map <Leader>v :python LittleHelper.visual_query_inplace("eval")<CR>
+map <Leader>x :python LittleHelper.visual_query_inplace("exec")<CR>
+map <Leader>d :python delete_visual_selection()<CR>
